@@ -1,0 +1,15 @@
+{
+  "id" : "x_configuration_signals_aggr",
+  "searchClusterId" : "default",
+  "commitWithin" : 10,
+  "features" : { },
+  "solrParams" : {
+    "name" : "x_configuration_signals_aggr",
+    "numShards" : 1,
+    "replicationFactor" : 2,
+    "maxShardsPerNode" : 1
+  },
+  "type" : "SIGNALS_AGGREGATION",
+  "relatedCollectionId" : "x_configuration",
+  "metadata" : { }
+}
