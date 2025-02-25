@@ -1,0 +1,13 @@
+{
+  "type" : "rest-call",
+  "id" : "delete-old-system-metrics",
+  "callParams" : {
+    "uri" : "solr://system_monitor/update",
+    "method" : "post",
+    "queryParams" : {
+      "wt" : "json"
+    },
+    "headers" : { },
+    "entity" : "<root><delete><query>timestamp_tdt:[* TO NOW-30DAYS]</query></delete><commit /></root>"
+  }
+}
