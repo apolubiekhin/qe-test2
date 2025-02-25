@@ -1,0 +1,6 @@
+{
+  "id" : "x_configuration",
+  "queryPipeline" : "x_configuration",
+  "collection" : "x_configuration",
+  "searchHandler" : "/select"
+}
