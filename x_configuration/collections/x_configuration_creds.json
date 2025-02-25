@@ -1,0 +1,13 @@
+{
+  "id" : "x_configuration_creds",
+  "searchClusterId" : "default",
+  "commitWithin" : 10000,
+  "features" : { },
+  "solrParams" : {
+    "name" : "x_configuration_creds",
+    "numShards" : 2,
+    "replicationFactor" : 1
+  },
+  "type" : "DATA",
+  "metadata" : { }
+}
