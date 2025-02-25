@@ -1,0 +1,10 @@
+{
+  "type" : "rest-call",
+  "id" : "refresh-autocomplete",
+  "callParams" : {
+    "uri" : "service://system-autocomplete/_refresh",
+    "method" : "post",
+    "queryParams" : { },
+    "headers" : { }
+  }
+}
