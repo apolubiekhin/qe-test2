@@ -1,0 +1,14 @@
+{
+  "id" : "x_configuration_auth_cache_logs",
+  "searchClusterId" : "default",
+  "commitWithin" : 10000,
+  "features" : { },
+  "solrParams" : {
+    "name" : "x_configuration_auth_cache_logs",
+    "numShards" : 2,
+    "replicationFactor" : 2
+  },
+  "type" : "SEARCHLOGS",
+  "relatedCollectionId" : "x_configuration_auth_cache",
+  "metadata" : { }
+}
