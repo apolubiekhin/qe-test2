@@ -1,0 +1,11 @@
+{
+  "resource" : "task:delete-old-system-metrics",
+  "enabled" : true,
+  "triggers" : [ {
+    "type" : "cron",
+    "enabled" : true,
+    "expression" : "0 26 4 ? * SUN",
+    "type" : "cron"
+  } ],
+  "default" : false
+}
