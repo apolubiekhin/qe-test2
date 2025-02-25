@@ -1,0 +1,12 @@
+{
+  "id" : "ds_x_configuration_scimCreds",
+  "connector" : "lucid.fileupload",
+  "type" : "fileupload",
+  "pipeline" : "x_configuration",
+  "parserId" : "_system",
+  "properties" : {
+    "collection" : "x_configuration_creds",
+    "fileId" : "scimCredentials.json",
+    "mediaType" : "application/octet-stream"
+  }
+}
