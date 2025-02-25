@@ -1,0 +1,151 @@
+{
+  "id" : "page",
+  "name" : "page",
+  "description" : "Represents a page, usually html, built for native access through a web browser",
+  "indexPipeline" : "test_christian",
+  "fields" : [ {
+    "name" : "title",
+    "description" : "The title of this web page",
+    "required" : false,
+    "mappings" : [ {
+      "solrField" : "title_t",
+      "queryField" : true,
+      "phraseMatch" : true,
+      "boostValue" : 5.0,
+      "phraseBoost" : 3.0
+    }, {
+      "solrField" : "title_txt_en",
+      "queryField" : true,
+      "phraseMatch" : true,
+      "boostValue" : 3.0,
+      "phraseBoost" : 2.0
+    } ]
+  }, {
+    "name" : "body",
+    "description" : "The main body content of this page",
+    "required" : true,
+    "mappings" : [ {
+      "solrField" : "body_t",
+      "queryField" : true,
+      "phraseMatch" : true,
+      "boostValue" : 2.0,
+      "phraseBoost" : 3.0
+    }, {
+      "solrField" : "body_txt_en",
+      "queryField" : true,
+      "phraseMatch" : true,
+      "boostValue" : 0.0,
+      "phraseBoost" : 2.0
+    } ]
+  }, {
+    "name" : "url",
+    "description" : "Where to find this page",
+    "required" : true,
+    "mappings" : [ {
+      "solrField" : "url_s",
+      "queryField" : false,
+      "phraseMatch" : false
+    } ]
+  }, {
+    "name" : "modified",
+    "description" : "When this page was last modified, if known",
+    "required" : false,
+    "mappings" : [ {
+      "solrField" : "modified_tdt",
+      "queryField" : false,
+      "phraseMatch" : false
+    } ]
+  }, {
+    "name" : "created",
+    "description" : "When this page was first created or published, if known",
+    "required" : false,
+    "mappings" : [ {
+      "solrField" : "created_tdt",
+      "queryField" : false,
+      "phraseMatch" : false
+    } ]
+  }, {
+    "name" : "image",
+    "description" : "An image that is representative of this page",
+    "required" : false,
+    "mappings" : [ {
+      "solrField" : "image_s",
+      "queryField" : false,
+      "phraseMatch" : false
+    } ]
+  }, {
+    "name" : "description",
+    "description" : "Any description provided for this page",
+    "required" : false,
+    "mappings" : [ {
+      "solrField" : "description_t",
+      "queryField" : true,
+      "phraseMatch" : true,
+      "boostValue" : 3.0,
+      "phraseBoost" : 2.0
+    }, {
+      "solrField" : "description_txt_en",
+      "queryField" : true,
+      "phraseMatch" : true,
+      "boostValue" : 2.0,
+      "phraseBoost" : 2.0
+    } ]
+  }, {
+    "name" : "keywords",
+    "description" : "Any SEO keywords associated with this page",
+    "required" : true,
+    "mappings" : [ {
+      "solrField" : "keywords_ss",
+      "queryField" : false,
+      "phraseMatch" : false
+    }, {
+      "solrField" : "keywords_txt",
+      "queryField" : true,
+      "phraseMatch" : false
+    } ]
+  }, {
+    "name" : "languageCode",
+    "description" : "The ISO 639-1 code for language that the body of page was written in, if known. Example: \"en\" for English",
+    "required" : false,
+    "mappings" : [ {
+      "solrField" : "languageCode_s",
+      "queryField" : false,
+      "phraseMatch" : false
+    } ]
+  }, {
+    "name" : "indexed",
+    "description" : "When this page was last indexed",
+    "required" : false,
+    "mappings" : [ {
+      "solrField" : "indexed_tdt",
+      "queryField" : false,
+      "phraseMatch" : false
+    } ]
+  }, {
+    "name" : "authorName",
+    "description" : "The name of the author, if known",
+    "required" : true,
+    "mappings" : [ {
+      "solrField" : "authorName_s",
+      "queryField" : false,
+      "phraseMatch" : false
+    } ]
+  }, {
+    "name" : "authorEmail",
+    "required" : false,
+    "mappings" : [ {
+      "solrField" : "authorEmail_s",
+      "queryField" : false,
+      "phraseMatch" : false
+    } ]
+  }, {
+    "name" : "authorId",
+    "description" : "A unique identifier for the author of this file, if known. Often same as authorEmail",
+    "required" : false,
+    "mappings" : [ {
+      "solrField" : "authorId_s",
+      "queryField" : false,
+      "phraseMatch" : false
+    } ]
+  } ]
+}
