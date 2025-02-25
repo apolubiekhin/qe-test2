@@ -1,0 +1,159 @@
+{
+  "id" : "lucidworks-web",
+  "stages" : [ {
+    "id" : "3d2da21d-4e24-4b05-917c-5760c0131246",
+    "translationMappings" : [ {
+      "source" : "og:author",
+      "target" : "author",
+      "operation" : "copy"
+    }, {
+      "source" : "article:author",
+      "target" : "author",
+      "operation" : "copy"
+    } ],
+    "retentionMappings" : [ ],
+    "updateMappings" : [ ],
+    "unmappedRule" : {
+      "keep" : true,
+      "delete" : false,
+      "fieldToMoveValuesTo" : "",
+      "fieldToCopyValuesTo" : "",
+      "valueToAddToUnmappedFields" : "",
+      "valueToSetOnUnmappedFields" : ""
+    },
+    "reservedFieldsMappingAllowed" : false,
+    "type" : "field-mapping",
+    "skip" : false,
+    "label" : "Find author fields"
+  }, {
+    "id" : "6973ae85-0e7f-4791-b9d5-13e2c9b08725",
+    "typeStrategy" : [ {
+      "resolverStrategy" : "pick_first",
+      "type" : "string"
+    } ],
+    "fieldStrategy" : [ ],
+    "creatorStrategy" : [ ],
+    "type" : "multivalue-resolver",
+    "skip" : false,
+    "label" : "Pick first author field"
+  }, {
+    "id" : "8e967d4d-d835-47cb-912c-deaeaf668d3b",
+    "rules" : [ {
+      "source" : [ "og:locale" ],
+      "target" : "languageCode",
+      "writeMode" : "append",
+      "pattern" : "^([\\[a-zA-Z]+)",
+      "returnIfNoMatch" : "input_string",
+      "group" : 1
+    } ],
+    "type" : "regex-extractor",
+    "skip" : false,
+    "label" : "Extract language code"
+  }, {
+    "id" : "0301f11a-778f-4d9a-bc41-c14da38258bc",
+    "translationMappings" : [ {
+      "source" : "id",
+      "target" : "url",
+      "operation" : "copy"
+    } ],
+    "retentionMappings" : [ ],
+    "updateMappings" : [ ],
+    "unmappedRule" : {
+      "keep" : true,
+      "delete" : false,
+      "fieldToMoveValuesTo" : "",
+      "fieldToCopyValuesTo" : "",
+      "valueToAddToUnmappedFields" : "",
+      "valueToSetOnUnmappedFields" : ""
+    },
+    "reservedFieldsMappingAllowed" : true,
+    "type" : "field-mapping",
+    "skip" : false,
+    "label" : "Copy ID to URL"
+  }, {
+    "id" : "523621aa-2ae8-4531-950b-c8acb7408149",
+    "dataModelType" : "page",
+    "matchTrigger" : {
+      "fieldToMatch" : "mimeType_s",
+      "valueToMatch" : "text/html"
+    },
+    "mappings" : [ {
+      "sourceField" : "title",
+      "dataModelField" : "title"
+    }, {
+      "sourceField" : "body",
+      "dataModelField" : "body"
+    }, {
+      "sourceField" : "url",
+      "dataModelField" : "url"
+    }, {
+      "sourceField" : "og:image",
+      "dataModelField" : "image"
+    }, {
+      "sourceField" : "og:description",
+      "dataModelField" : "description"
+    }, {
+      "sourceField" : "article:published_time",
+      "dataModelField" : "published"
+    }, {
+      "sourceField" : "article:modified_time",
+      "dataModelField" : "modified"
+    }, {
+      "sourceField" : "languageCode",
+      "dataModelField" : "languageCode"
+    }, {
+      "sourceField" : "keywords",
+      "dataModelField" : "keywords"
+    }, {
+      "sourceField" : "fetchedDate_dt",
+      "dataModelField" : "indexed"
+    }, {
+      "sourceField" : "authorName",
+      "dataModelField" : "authorName"
+    } ],
+    "keepUnmappedFields" : false,
+    "type" : "datamodel-mapping",
+    "skip" : false,
+    "label" : "Map to page model"
+  }, {
+    "id" : "de92cafd-3845-4437-beef-15d4232ac0bf",
+    "dataModelType" : "file",
+    "matchTrigger" : {
+      "fieldToMatch" : "*",
+      "valueToMatch" : "."
+    },
+    "mappings" : [ {
+      "sourceField" : "url",
+      "dataModelField" : "url"
+    }, {
+      "sourceField" : "title",
+      "dataModelField" : "title"
+    }, {
+      "sourceField" : "body",
+      "dataModelField" : "body"
+    }, {
+      "sourceField" : "name",
+      "dataModelField" : "name"
+    }, {
+      "sourceField" : "created",
+      "dataModelField" : "created"
+    }, {
+      "sourceField" : "modified",
+      "dataModelField" : "modified"
+    }, {
+      "sourceField" : "fetchedDate_dt",
+      "dataModelField" : "indexed"
+    } ],
+    "keepUnmappedFields" : true,
+    "type" : "datamodel-mapping",
+    "skip" : false,
+    "label" : "Map to file model"
+  }, {
+    "id" : "1d9a0246-981b-4deb-aa56-eb081eaea495",
+    "dataModelTypeField" : "_lw_data_model_type_s",
+    "type" : "call-datamodel-pipeline",
+    "skip" : false,
+    "label" : "Forward to DM pipelines"
+  } ],
+  "properties" : { }
+}
