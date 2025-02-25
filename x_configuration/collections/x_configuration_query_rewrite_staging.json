@@ -1,0 +1,15 @@
+{
+  "id" : "x_configuration_query_rewrite_staging",
+  "searchClusterId" : "default",
+  "commitWithin" : 10000,
+  "features" : { },
+  "solrParams" : {
+    "name" : "x_configuration_query_rewrite_staging",
+    "numShards" : 1,
+    "replicationFactor" : 1,
+    "configTemplate" : "solr/conf/query_rewrite.zip"
+  },
+  "type" : "QUERY_REWRITE",
+  "relatedCollectionId" : "recommender_models",
+  "metadata" : { }
+}
