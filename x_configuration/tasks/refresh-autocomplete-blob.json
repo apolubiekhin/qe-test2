@@ -1,0 +1,6 @@
+{
+  "type" : "blob-download",
+  "id" : "refresh-autocomplete-blob",
+  "url" : "https://doc.lucidworks.com/autocomplete/5.4/autocomplete_documentation.json",
+  "blobId" : "autocomplete/autocomplete_documentation.json"
+}
