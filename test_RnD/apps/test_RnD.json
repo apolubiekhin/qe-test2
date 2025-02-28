@@ -1,0 +1,9 @@
+{
+  "id" : "test_RnD",
+  "name" : "test_RnD",
+  "dataUri" : "App-Tile-07-460x160.png",
+  "properties" : {
+    "headerImageName" : "headerImage7",
+    "tileColor" : "apps-darkblue"
+  }
+}
