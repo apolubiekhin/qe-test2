@@ -1,0 +1,13 @@
+{
+  "type" : "rest-call",
+  "id" : "delete-old-job-history",
+  "callParams" : {
+    "uri" : "solr://system_jobs_history/update",
+    "method" : "post",
+    "queryParams" : {
+      "wt" : "json"
+    },
+    "headers" : { },
+    "entity" : "<root><delete><query>timestamp_dt:[* TO NOW-30DAYS] AND type_s:history</query></delete><commit /></root>"
+  }
+}
