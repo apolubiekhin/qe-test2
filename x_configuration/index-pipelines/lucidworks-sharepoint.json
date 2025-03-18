@@ -1,0 +1,194 @@
+{
+  "id" : "lucidworks-sharepoint",
+  "stages" : [ {
+    "id" : "bd63f9c7-c898-4441-b40b-8c286e95e618",
+    "translationMappings" : [ {
+      "source" : "createdx0020By",
+      "target" : "tmpAuthorID",
+      "operation" : "copy"
+    }, {
+      "source" : "modifiedx0020By",
+      "target" : "tmpAuthorID",
+      "operation" : "copy"
+    } ],
+    "retentionMappings" : [ ],
+    "updateMappings" : [ ],
+    "unmappedRule" : {
+      "keep" : true,
+      "delete" : false,
+      "fieldToMoveValuesTo" : "",
+      "fieldToCopyValuesTo" : "",
+      "valueToAddToUnmappedFields" : "",
+      "valueToSetOnUnmappedFields" : ""
+    },
+    "reservedFieldsMappingAllowed" : false,
+    "type" : "field-mapping",
+    "skip" : false,
+    "label" : "Select potential author IDs"
+  }, {
+    "id" : "77bc2e54-14e2-4056-aeb7-cec877e3f9a0",
+    "typeStrategy" : [ ],
+    "fieldStrategy" : [ {
+      "fieldName" : "tmpAuthorID",
+      "resolverStrategy" : "pick_first"
+    } ],
+    "creatorStrategy" : [ ],
+    "type" : "multivalue-resolver",
+    "skip" : false
+  }, {
+    "id" : "03642207-4814-4fd6-8f11-e17c32db29a1",
+    "rules" : [ {
+      "source" : [ "viewUrl" ],
+      "target" : "baseUrl",
+      "writeMode" : "append",
+      "pattern" : "^(https?://[^/]+)",
+      "returnIfNoMatch" : "null",
+      "group" : 1
+    } ],
+    "type" : "regex-extractor",
+    "skip" : false,
+    "label" : "Extract base url"
+  }, {
+    "id" : "23b13a08-f4f3-4414-a7b8-c3d99e9cf985",
+    "translationMappings" : [ ],
+    "retentionMappings" : [ ],
+    "updateMappings" : [ {
+      "field" : "tmpImageUrl",
+      "value" : "<baseUrl><imageUrl>",
+      "operation" : "set"
+    } ],
+    "unmappedRule" : {
+      "keep" : true,
+      "delete" : false,
+      "fieldToMoveValuesTo" : "",
+      "fieldToCopyValuesTo" : "",
+      "valueToAddToUnmappedFields" : "",
+      "valueToSetOnUnmappedFields" : ""
+    },
+    "reservedFieldsMappingAllowed" : false,
+    "type" : "field-mapping",
+    "skip" : false,
+    "label" : "Construct image url",
+    "condition" : "doc.hasField(\"imageUrl\") && doc.hasField(\"baseUrl\")"
+  }, {
+    "id" : "6d05e303-4ac0-4394-a421-291decb95231",
+    "translationMappings" : [ ],
+    "retentionMappings" : [ ],
+    "updateMappings" : [ {
+      "field" : "indexed",
+      "value" : "<_NOW_>",
+      "operation" : "add"
+    } ],
+    "unmappedRule" : {
+      "keep" : true,
+      "delete" : false,
+      "fieldToMoveValuesTo" : "",
+      "fieldToCopyValuesTo" : "",
+      "valueToAddToUnmappedFields" : "",
+      "valueToSetOnUnmappedFields" : ""
+    },
+    "reservedFieldsMappingAllowed" : false,
+    "type" : "field-mapping",
+    "skip" : false,
+    "label" : "Add current time"
+  }, {
+    "id" : "f5b2fc3b-ac69-4d01-b371-39f3a0d448fb",
+    "dataModelType" : "file",
+    "matchTrigger" : {
+      "fieldToMatch" : "_lw_parser_type_s",
+      "valueToMatch" : "/(text|tika)/"
+    },
+    "mappings" : [ {
+      "sourceField" : "body",
+      "dataModelField" : "body"
+    }, {
+      "sourceField" : "title",
+      "dataModelField" : "title"
+    }, {
+      "sourceField" : "fileName",
+      "dataModelField" : "name"
+    }, {
+      "sourceField" : "viewUrl",
+      "dataModelField" : "url"
+    }, {
+      "sourceField" : "lastModifiedDate",
+      "dataModelField" : "modified"
+    }, {
+      "sourceField" : "authorLookupValue",
+      "dataModelField" : "authorName"
+    }, {
+      "sourceField" : "tmpAuthorID",
+      "dataModelField" : "authorId"
+    }, {
+      "sourceField" : "createdDate",
+      "dataModelField" : "created"
+    }, {
+      "sourceField" : "fileType",
+      "dataModelField" : "extension"
+    }, {
+      "sourceField" : "size",
+      "dataModelField" : "size"
+    }, {
+      "sourceField" : "indexed",
+      "dataModelField" : "indexed"
+    } ],
+    "keepUnmappedFields" : false,
+    "type" : "datamodel-mapping",
+    "skip" : false,
+    "label" : "Map to file model"
+  }, {
+    "id" : "5cea8a13-14dc-479a-b217-62d3fb2efab6",
+    "dataModelType" : "page",
+    "matchTrigger" : {
+      "fieldToMatch" : "*",
+      "valueToMatch" : "."
+    },
+    "mappings" : [ {
+      "sourceField" : "title",
+      "dataModelField" : "title"
+    }, {
+      "sourceField" : "body",
+      "dataModelField" : "body"
+    }, {
+      "sourceField" : "viewUrl",
+      "dataModelField" : "url"
+    }, {
+      "sourceField" : "indexed",
+      "dataModelField" : "indexed"
+    }, {
+      "sourceField" : "createdDate",
+      "dataModelField" : "created"
+    }, {
+      "sourceField" : "lastModifiedDate",
+      "dataModelField" : "modified"
+    }, {
+      "sourceField" : "tmpImageUrl",
+      "dataModelField" : "image"
+    }, {
+      "sourceField" : "description",
+      "dataModelField" : "description"
+    }, {
+      "sourceField" : "authorLookupValue",
+      "dataModelField" : "authorName"
+    }, {
+      "sourceField" : "tmpAuthorID",
+      "dataModelField" : "authorId"
+    }, {
+      "sourceField" : "size",
+      "dataModelField" : "size"
+    }, {
+      "sourceField" : "keywords",
+      "dataModelField" : "keywords"
+    } ],
+    "keepUnmappedFields" : false,
+    "type" : "datamodel-mapping",
+    "skip" : false,
+    "label" : "Map to page model"
+  }, {
+    "id" : "d8ead8ff-fe94-4dd0-81b2-308f9b50b1dc",
+    "dataModelTypeField" : "_lw_data_model_type_s",
+    "type" : "call-datamodel-pipeline",
+    "skip" : false
+  } ],
+  "properties" : { }
+}

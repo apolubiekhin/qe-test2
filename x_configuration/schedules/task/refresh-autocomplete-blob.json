@@ -1,0 +1,11 @@
+{
+  "resource" : "task:refresh-autocomplete-blob",
+  "enabled" : true,
+  "triggers" : [ {
+    "type" : "cron",
+    "enabled" : true,
+    "expression" : "0 0 13 * * ?",
+    "type" : "cron"
+  } ],
+  "default" : false
+}

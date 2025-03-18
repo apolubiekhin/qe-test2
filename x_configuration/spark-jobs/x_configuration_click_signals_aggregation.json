@@ -1,0 +1,26 @@
+{
+  "type" : "sql_template",
+  "id" : "x_configuration_click_signals_aggregation",
+  "inputCollection" : "x_configuration_signals",
+  "outputCollection" : "x_configuration_signals_aggr",
+  "sql" : "WITH sigs_with_filters AS (\n   SELECT c.query as query,\n          c.doc_id,\n          q.filters_s as filters,\n          c.type,\n          c.ref_time,\n          coalesce(c.count_i,1) as count_i,\n          c.timestamp_tdt,\n          greatest(coalesce(c.weight_d,0.1),0.0) as weight_d\n     FROM ${inputCollection} c\n LEFT JOIN (SELECT id, filters_s FROM ${inputCollection} WHERE type='response') q ON q.id = c.fusion_query_id\n    WHERE c.type IN (${signalTypes}) AND c.timestamp_tdt >= c.catchup_timestamp_tdt\n ), signal_type_groups AS (\n     SELECT SUM(count_i) AS typed_aggr_count_i,\n            query,\n            doc_id,\n            type,\n            filters,\n            time_decay(count_i, timestamp_tdt, \"30 days\", ref_time, weight_d) AS typed_weight_d\n       FROM sigs_with_filters\n   GROUP BY doc_id, query, filters, type\n ) SELECT concat_ws('|', query, doc_id, filters) as id,\n          SUM(typed_aggr_count_i) AS aggr_count_i,\n          query AS query_s,\n          query AS query_t,\n          doc_id AS doc_id_s,\n          filters AS filters_s,\n          SPLIT(filters, ' \\\\$ ') AS filters_ss,\n          weighted_sum(typed_weight_d, type, '${signalTypeWeights}') AS weight_d\n     FROM signal_type_groups\n GROUP BY query, doc_id, filters",
+  "rollupSql" : "SELECT concat_ws('|', query_s, doc_id_s, filters_s) as id,\n  query_s,\n  query_s as query_t,\n  doc_id_s,\n  filters_s,\n  first(aggr_type_s) AS aggr_type_s,\n  SPLIT(filters_s, ' \\\\$ ') AS filters_ss,\n  SUM(weight_d) AS weight_d,\n  SUM(aggr_count_i) AS aggr_count_i\n  FROM x_configuration_signals_aggr\n  GROUP BY query_s, doc_id_s, filters_s",
+  "parameters" : [ {
+    "key" : "signalTypeWeights",
+    "value" : "click:1.0,cart:10.0,purchase:25.0"
+  } ],
+  "selectQuery" : "*:*",
+  "sourceRemove" : false,
+  "sourceCatchup" : true,
+  "hiddenParameters" : [ {
+    "key" : "signalTypes",
+    "value" : "_regex/signalTypeWeights/([\\w\\-\\.]*):([\\d\\.\\-]*)(,|$)/'$1'$3/g"
+  } ],
+  "skipCheckEnabled" : true,
+  "notes" : "Computes an aggregated weight for each query / item combination found in the signals collection. The weight for each group is computed using an exponential time-decay on signal count (30 day half-life) and a weighted sum based on the signal type. Use the 'signalTypeWeights' parameter to set the correct signal types and weights for your dataset. The results of this job can be used to boost documents at query time using the boosting stage.",
+  "useNaturalKey" : true,
+  "optimizeSegments" : 0,
+  "dataFormat" : "solr",
+  "sparkSQL" : "SELECT * from spark_input",
+  "sparkPartitions" : 200
+}

@@ -1,0 +1,6 @@
+{
+  "id" : "_shared",
+  "name" : "_shared",
+  "isSystem" : true,
+  "description" : "System objects that could be added to customer apps"
+}

@@ -1,0 +1,156 @@
+{
+  "id" : "file",
+  "name" : "file",
+  "description" : "Represents a generic file, for example a pdf, text file or spreadsheet.",
+  "indexPipeline" : "file",
+  "fields" : [ {
+    "name" : "title",
+    "description" : "Any extracted title found in the contents of this file",
+    "required" : false,
+    "mappings" : [ {
+      "solrField" : "title_t",
+      "queryField" : true,
+      "phraseMatch" : true,
+      "boostValue" : 5.0,
+      "phraseBoost" : 3.0
+    }, {
+      "solrField" : "title_txt_en",
+      "queryField" : true,
+      "phraseMatch" : true,
+      "boostValue" : 3.0,
+      "phraseBoost" : 2.0
+    } ]
+  }, {
+    "name" : "body",
+    "description" : "Any extracted main body contents of this file",
+    "required" : false,
+    "mappings" : [ {
+      "solrField" : "body_t",
+      "queryField" : true,
+      "phraseMatch" : true,
+      "boostValue" : 2.0,
+      "phraseBoost" : 2.0
+    }, {
+      "solrField" : "body_txt_en",
+      "queryField" : true,
+      "phraseMatch" : true,
+      "boostValue" : 2.0,
+      "phraseBoost" : 2.0
+    } ]
+  }, {
+    "name" : "name",
+    "description" : "The name of this file",
+    "required" : true,
+    "mappings" : [ {
+      "solrField" : "name_s",
+      "queryField" : false,
+      "phraseMatch" : false
+    }, {
+      "solrField" : "name_t",
+      "queryField" : true,
+      "phraseMatch" : false
+    } ]
+  }, {
+    "name" : "url",
+    "description" : "Where to find this file",
+    "required" : true,
+    "mappings" : [ {
+      "solrField" : "url_s",
+      "queryField" : false,
+      "phraseMatch" : false
+    } ]
+  }, {
+    "name" : "modified",
+    "description" : "When this file was last modified, if known",
+    "required" : false,
+    "mappings" : [ {
+      "solrField" : "modified_tdt",
+      "queryField" : false,
+      "phraseMatch" : false
+    } ]
+  }, {
+    "name" : "created",
+    "description" : "When this file was first created, if known",
+    "required" : false,
+    "mappings" : [ {
+      "solrField" : "created_tdt",
+      "queryField" : false,
+      "phraseMatch" : false
+    } ]
+  }, {
+    "name" : "languageCode",
+    "description" : "The ISO 639-1 code for language that the body of file was written in, if known. Example: \"en\" for English",
+    "required" : false,
+    "mappings" : [ {
+      "solrField" : "languageCode_s",
+      "queryField" : false,
+      "phraseMatch" : false
+    } ]
+  }, {
+    "name" : "extension",
+    "description" : "The file extension, for example pdf or txt",
+    "required" : false,
+    "mappings" : [ {
+      "solrField" : "extension_s",
+      "queryField" : false,
+      "phraseMatch" : false
+    } ]
+  }, {
+    "name" : "filetype",
+    "description" : "The file type, for example PDF, Image or Text",
+    "required" : false,
+    "mappings" : [ {
+      "solrField" : "filetype_s",
+      "queryField" : false,
+      "phraseMatch" : false
+    } ]
+  }, {
+    "name" : "indexed",
+    "description" : "When this file was last indexed",
+    "required" : false,
+    "mappings" : [ {
+      "solrField" : "indexed_tdt",
+      "queryField" : false,
+      "phraseMatch" : false
+    } ]
+  }, {
+    "name" : "authorName",
+    "description" : "The name of the author of this file, if known",
+    "required" : false,
+    "mappings" : [ {
+      "solrField" : "authorName_s",
+      "queryField" : false,
+      "phraseMatch" : false
+    }, {
+      "solrField" : "authorName_t",
+      "queryField" : false,
+      "phraseMatch" : false
+    } ]
+  }, {
+    "name" : "authorEmail",
+    "required" : false,
+    "mappings" : [ {
+      "solrField" : "authorEmail_s",
+      "queryField" : false,
+      "phraseMatch" : false
+    } ]
+  }, {
+    "name" : "size",
+    "description" : "The size of this file in bytes",
+    "required" : false,
+    "mappings" : [ {
+      "solrField" : "size_l",
+      "queryField" : false,
+      "phraseMatch" : false
+    } ]
+  }, {
+    "name" : "authorId",
+    "description" : "A unique identifier for the author of this file, if known. Often same as authorEmail",
+    "required" : false,
+    "mappings" : [ {
+      "solrField" : "authorId_s",
+      "queryField" : false,
+      "phraseMatch" : false
+    } ]
+  } ]
+}
