@@ -1,0 +1,7 @@
+{
+  "type" : "system-logs-cleanup",
+  "id" : "delete-old-system-logs",
+  "collection" : "system_logs",
+  "days" : 30,
+  "query" : "-logger_class_s:\"com.lucidworks.cloud.gateway.audit\""
+}
