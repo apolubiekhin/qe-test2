@@ -1,0 +1,26 @@
+{
+  "id" : "x_configuration",
+  "searchClusterId" : "default",
+  "commitWithin" : 10000,
+  "features" : {
+    "searchLogs" : {
+      "name" : "searchLogs",
+      "collectionId" : "x_configuration",
+      "params" : { },
+      "enabled" : true
+    },
+    "signals" : {
+      "name" : "signals",
+      "collectionId" : "x_configuration",
+      "params" : { },
+      "enabled" : true
+    }
+  },
+  "solrParams" : {
+    "name" : "x_configuration",
+    "numShards" : 1,
+    "replicationFactor" : 2
+  },
+  "type" : "DATA",
+  "metadata" : { }
+}
