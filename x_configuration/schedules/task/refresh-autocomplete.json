@@ -1,0 +1,13 @@
+{
+  "resource" : "task:refresh-autocomplete",
+  "enabled" : true,
+  "triggers" : [ {
+    "type" : "interval",
+    "enabled" : true,
+    "interval" : 1,
+    "timeUnit" : "hour",
+    "startTime" : "2023-03-02T02:40:38.092Z",
+    "type" : "interval"
+  } ],
+  "default" : false
+}
