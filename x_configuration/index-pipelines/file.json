@@ -1,0 +1,123 @@
+{
+  "id" : "file",
+  "stages" : [ {
+    "id" : "db6f63e4-73ed-44f5-a1c8-443553c7672b",
+    "source" : [ "body" ],
+    "outputType" : "document",
+    "outputKey" : "languages",
+    "documentPostfix" : "_lang",
+    "languages" : [ ],
+    "minimumConfidence" : 0.5,
+    "returnAllMatchedWithConfidenceScores" : false,
+    "type" : "lang-detect",
+    "skip" : false,
+    "label" : "Detect languageCode if needed",
+    "condition" : "!doc.hasField(\"languageCode\")"
+  }, {
+    "id" : "3ebe54a3-c053-4244-bc79-50d18e1fad1f",
+    "translationMappings" : [ {
+      "source" : "body_lang",
+      "target" : "languageCode",
+      "operation" : "move"
+    } ],
+    "retentionMappings" : [ ],
+    "updateMappings" : [ ],
+    "unmappedRule" : {
+      "keep" : true,
+      "delete" : false,
+      "fieldToMoveValuesTo" : "",
+      "fieldToCopyValuesTo" : "",
+      "valueToAddToUnmappedFields" : "",
+      "valueToSetOnUnmappedFields" : ""
+    },
+    "reservedFieldsMappingAllowed" : false,
+    "type" : "field-mapping",
+    "skip" : false,
+    "label" : "Move languageCode",
+    "condition" : "!doc.hasField(\"languageCode\")"
+  }, {
+    "id" : "ca8ed500-b87d-46a8-8b44-e2f81f69b951",
+    "rules" : [ {
+      "source" : [ "url" ],
+      "target" : "name",
+      "writeMode" : "append",
+      "pattern" : ".*/([^/]+)",
+      "returnIfNoMatch" : "null",
+      "noMatchValue" : "",
+      "group" : 1
+    } ],
+    "type" : "regex-extractor",
+    "skip" : false,
+    "label" : "Extract name",
+    "condition" : "!doc.hasField(\"name\") && doc.hasField(\"url\") "
+  }, {
+    "id" : "69ba9320-db62-44bc-bd53-19158fd988e8",
+    "rules" : [ {
+      "source" : [ "name" ],
+      "target" : "extension",
+      "writeMode" : "overwrite",
+      "pattern" : ".*\\\\.([a-zA-Z0-9]{0,6})$",
+      "returnIfNoMatch" : "null",
+      "group" : 1
+    } ],
+    "type" : "regex-extractor",
+    "skip" : false,
+    "label" : "Extract file extension",
+    "condition" : "!doc.hasField(\"extension\")"
+  }, {
+    "id" : "c606aa81-e7f5-458c-a385-703e871e85b5",
+    "findListReplaceRules" : [ ],
+    "findReplaceRules" : [ {
+      "sourceField" : "name",
+      "caseSensitive" : true,
+      "keyValues" : [ {
+        "key" : "%20",
+        "value" : " "
+      } ]
+    } ],
+    "type" : "find-replace",
+    "skip" : false,
+    "label" : "Decode spaces in names"
+  }, {
+    "id" : "cd5cc0d5-0590-4aa3-bb44-bdecfef0659d",
+    "translationMappings" : [ {
+      "source" : "name",
+      "target" : "title",
+      "operation" : "copy"
+    } ],
+    "retentionMappings" : [ ],
+    "updateMappings" : [ ],
+    "unmappedRule" : {
+      "keep" : true,
+      "delete" : false,
+      "fieldToMoveValuesTo" : "",
+      "fieldToCopyValuesTo" : "",
+      "valueToAddToUnmappedFields" : "",
+      "valueToSetOnUnmappedFields" : ""
+    },
+    "reservedFieldsMappingAllowed" : false,
+    "type" : "field-mapping",
+    "skip" : false,
+    "label" : "Use filename as title, if no title exist",
+    "condition" : "!doc.hasField(\"title\")"
+  }, {
+    "id" : "5c20785d-3a5e-4ecf-8c3c-323ed1059188",
+    "duplicateSingleValuedFields" : false,
+    "fieldsToExclude" : [ ],
+    "advancedTextFieldsIndexing" : false,
+    "maxTextLengthForAdvancedIndexing" : 100,
+    "type" : "solr-dynamic-field-name-mapping",
+    "skip" : false
+  }, {
+    "id" : "943e8468-1a28-40e3-afed-8d4547a32ead",
+    "enforceSchema" : true,
+    "fieldsList" : true,
+    "dateFormats" : [ ],
+    "params" : [ ],
+    "bufferDocsForSolr" : true,
+    "allowBlacklistedRequestParameters" : false,
+    "type" : "solr-index",
+    "skip" : false
+  } ],
+  "properties" : { }
+}
