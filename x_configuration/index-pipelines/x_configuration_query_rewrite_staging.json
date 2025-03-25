@@ -1,0 +1,15 @@
+{
+  "id" : "x_configuration_query_rewrite_staging",
+  "stages" : [ {
+    "id" : "c024e153-8413-4750-a042-169787f6e04b",
+    "enforceSchema" : true,
+    "fieldsList" : false,
+    "dateFormats" : [ ],
+    "params" : [ ],
+    "bufferDocsForSolr" : true,
+    "allowBlacklistedRequestParameters" : false,
+    "type" : "solr-index",
+    "skip" : false
+  } ],
+  "properties" : { }
+}
