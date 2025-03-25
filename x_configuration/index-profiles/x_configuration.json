@@ -1,0 +1,7 @@
+{
+  "id" : "x_configuration",
+  "indexPipeline" : "x_configuration",
+  "collection" : "x_configuration",
+  "parser" : "x_configuration",
+  "params" : [ ]
+}
