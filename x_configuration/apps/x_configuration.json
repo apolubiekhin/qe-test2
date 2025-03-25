@@ -1,0 +1,10 @@
+{
+  "id" : "x_configuration",
+  "name" : "x_configuration",
+  "description" : "Title: Allianz Configuration \nEnv: SI \nVersion: 2.1.0 \nDate: 10/01/2024, 09:55:51",
+  "dataUri" : "App-Tile-08-460x160.png",
+  "properties" : {
+    "headerImageName" : "headerImage8",
+    "tileColor" : "apps-darkblue"
+  }
+}
