@@ -1,0 +1,28 @@
+{
+  "type" : "sql_template",
+  "id" : "x_configuration_session_rollup",
+  "inputCollection" : "x_configuration_signals",
+  "outputCollection" : "x_configuration_signals",
+  "sql" : "WITH session_agg AS (\n     SELECT COUNT(1) AS activity_count,\n            MIN(timestamp_tdt) AS start,\n            MAX(timestamp_tdt) AS end,\n            timediff(MAX(timestamp_tdt), MIN(timestamp_tdt), \"MINUTES\") AS duration,\n            'session' AS type,\n            first(user_id) AS user,\n            session_keywords(query) AS keywords,\n            session\n       FROM ${inputCollection}\n      WHERE timestamp_tdt IS NOT NULL\n        AND type != 'session'\n        AND session IS NOT NULL\n        AND session NOT IN (SELECT session FROM ${inputCollection} WHERE type = 'session' AND session IS NOT NULL)\n   GROUP BY session\n     HAVING timediff(current_timestamp(), MAX(timestamp_tdt), \"SECONDS\") >= ${elapsedSecsSinceLastActivity} OR timediff(current_timestamp(), MIN(timestamp_tdt), \"SECONDS\") >= ${elapsedSecsSinceSessionStart})\n SELECT activity_count, start, end, duration, type, user, keywords, session FROM session_agg",
+  "parameters" : [ {
+    "key" : "elapsedSecsSinceLastActivity",
+    "value" : "360"
+  }, {
+    "key" : "elapsedSecsSinceSessionStart",
+    "value" : "3600"
+  } ],
+  "selectQuery" : "*:*",
+  "sourceRemove" : false,
+  "sourceCatchup" : false,
+  "hiddenParameters" : [ {
+    "key" : "outputProjectedFieldsOnly",
+    "value" : "true"
+  } ],
+  "skipCheckEnabled" : false,
+  "notes" : "Aggregate related user activity into a session signal containing activity count, duration, and keywords (based on user search terms). This job is used by the Fusion Insights application to show reports about user sessions. Use the 'elapsedSecsSinceLastActivity' and 'elapsedSecsSinceSessionStart' parameters to determine when a user session is considered to be complete.",
+  "useNaturalKey" : true,
+  "optimizeSegments" : 0,
+  "dataFormat" : "solr",
+  "sparkSQL" : "SELECT * FROM spark_input",
+  "sparkPartitions" : 200
+}
